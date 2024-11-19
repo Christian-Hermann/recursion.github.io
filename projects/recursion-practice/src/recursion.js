@@ -44,12 +44,13 @@ var arraySum = function(array) {
 // 4. Check if a number is even.
 var isEven = function(n) {
 
-n = Math.abs(n);
-
 if (n === 0){
   return true;
 } else if ( n === 1) {
   return false;
+}
+if (n < 0){
+  return isEven(n + 2);
 }
  
 return isEven(n - 2);
