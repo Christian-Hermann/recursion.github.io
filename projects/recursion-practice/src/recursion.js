@@ -76,15 +76,11 @@ if (n > 0){
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function(x, y) {
  
-if (x === y || (x > y && x - 1 === y) || (x < y && x + 1 === y)){
+if (x >= || x === y){
   return [];
 }
 
-if (x < y){
-  return [x = 1].concat(range(x + 1, y));
-}
-
-return [x - 1].concat(range(x - 1, y));
+return [x].concat(range(x + 1, y))
 
 };
 
