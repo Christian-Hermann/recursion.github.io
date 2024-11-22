@@ -203,28 +203,64 @@ var compareStr = function(str1, str2, index = 0) {
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str){
+var createArray = function(str, index = 0, result = []){
+  if (index === str.length){
+    return result;
+  }
+  result.push(str[index]);
+
+  return createArray(str, index + 1, result);
+
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function (array, result = []) {
+if(array.length === 0){
+  return result;
+}
+result.unshift(array[0]);
+
+return reverseArr(array.slice(1), result);
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
-var buildList = function(value, length) {
+var buildList = function(value, length, result = []) {
+  if (length === 0){
+    return result;
+  }
+  result.push(value);
+
+  return buildList(value, length - 1, result);
 };
 
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function(array, value) {
+var countOccurrence = function(array, value, count = 0) {
+if (array.length === 0){
+  return count;
+}
+if (array[0] === value){
+  count += 1;
+}
+return countOccurrence(array.slice(1), value, count);
 };
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
-var rMap = function(array, callback) {
+var rMap = function(array, callback, index = 0, result = []) {
+  if(index === array.length){
+    return result;
+  }
+  result.push(callback(array[index]));
+
+  return rMap(array, callback, index + 1, result);
+
+  var timesTwo = function(n) {
+    n * 2
+  }
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -259,7 +295,18 @@ var fibonacci = function(n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function(n) {
+var nthFibo = function(n, x = 0, y = 1) {
+ if (n < 0){
+  return null;
+ }
+ if (n === 0){
+  return x;
+ }
+ if(n === 1){
+  return y;
+ }
+ return nthFibo(n - 1, y, x + y);
+
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
